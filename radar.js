@@ -1,5 +1,11 @@
 function init(h,w) {
-  $('#title').text(document.title);  
+  var defaultFontSize = 14,
+      defaultFontFamily = "\"Trebuchet MS\", Helvetica, sans-serif",
+      defaultFont = defaultFontSize + "px " + defaultFontFamily;
+
+  $('#title')
+      .text(document.title)
+      .width(w);  
 	   
  var radar = new pv.Panel()
       .width(w)
@@ -14,7 +20,9 @@ radar.add(pv.Dot)
        .radius(function(d){return d.r;})
        .strokeStyle("#ccc")
        .anchor("top")       
-       .add(pv.Label).text(function(d) { return d.name;});
+       .add(pv.Label)
+       .text(function(d) { return d.name;})
+       .font(defaultFont);
 
 //quadrant lines -- vertical
 radar.add(pv.Line)
@@ -63,7 +71,7 @@ radar.add(pv.Line)
 
 //Quadrant Ledgends
 var radar_quadrant_ctr=1;
-var quadrantFontSize = 18;
+var quadrantFontSize = 20;
 var headingFontSize = 14;
 var stageHeadingCount = 0;
 var lastRadius = 0;
@@ -82,7 +90,7 @@ for (var i = 0; i < radar_data.length; i++) {
             .text(  radar_data[i].quadrant )		 
             .strokeStyle( radar_data[i].color )
             .fillStyle( radar_data[i].color )                    
-            .font(quadrantFontSize + "px sans-serif");
+            .font(quadrantFontSize + "px " + defaultFontFamily);
          
         lastQuadrant = radar_data[i].quadrant;
 
